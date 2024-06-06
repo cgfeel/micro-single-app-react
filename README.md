@@ -1,6 +1,9 @@
 # micro-single-app-react
 
-一个基于 `single-spa` 的 `React` 子应用演示
+一个基于 `single-spa` 的 `React` 子应用演示，完整内容查看微前端主仓库：https://github.com/cgfeel/zf-micro-app
 
-- 完整内容查看微前端主仓库：https://github.com/cgfeel/zf-micro-app
-- `single-spa` 总结见基座仓库：https://github.com/cgfeel/micro-single-app-substrate
+当前项目包含 3 个仓库：
+
+- `single-spa` 基座-主应用：https://github.com/cgfeel/micro-single-app-substrate
+- `React` 子应用：https://github.com/cgfeel/micro-single-app-react
+- `Vue` 子应用：https://github.com/cgfeel/micro-single-app-vue
