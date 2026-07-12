@@ -62,7 +62,7 @@ jobs:
         if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: zf-micro-app/apps/single-spa/single-spa-raw/dist
+          path: zf-micro-app/apps/single-spa/react/dist
 
   deploy:
     if: github.event_name == 'push'
