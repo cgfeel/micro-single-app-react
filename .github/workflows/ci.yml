@@ -55,7 +55,7 @@ jobs:
       # 5. 执行构建（构建指定子包，或所有子包）
       - name: Build project
         working-directory: zf-micro-app
-        run: pnpm --filter single-spa-raw build
+        run: pnpm --filter @levi/react build
 
       # 6. 上传Storybook静态文件为Pages工件
       - name: Upload Pages artifact
