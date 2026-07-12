@@ -1,18 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import ReactDOMClient from "react-dom/client";
 import singleSpaReact from "single-spa-react";
 import Root from "./root.component";
 
 const lifecycles = singleSpaReact({
   React,
   ReactDOM,
+  ReactDOMClient,
   rootComponent: Root,
   errorBoundary(err, info, props) {
     // Customize the root error boundary for your microfrontend here.
-    return null;
+    return <>{""}</>;
   },
 });
 
 // 接入协议，子应用必须提供接入协议
 // 对于 single-spa 而言，暴露接入协议就可以接入到项目中
-export const { bootstrap, mount, unmount } = lifecycles;
+export const {bootstrap, mount, unmount} = lifecycles;

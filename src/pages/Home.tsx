@@ -1,4 +1,4 @@
-function Home({ name }: HomeProps) {
+function Home({name}: HomeProps) {
   return <section>{name} is mounted!</section>;
 }
 

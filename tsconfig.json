@@ -1,10 +1,13 @@
 {
   "extends": "ts-config-single-spa",
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
+    "moduleResolution": "node",
     "jsx": "react-jsx",
+    "rootDir": "src",
     "declarationDir": "dist"
   },
   "files": ["src/levi-react.tsx"],
-  "include": ["src/**/*"],
-  "exclude": ["src/**/*.test*"]
+  "include": ["src"]
+  // "exclude": ["src/**/*.test*"]
 }
