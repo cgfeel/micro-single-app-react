@@ -27,17 +27,12 @@ module.exports = (webpackConfigEnv, argv) => {
 
   delete defaultConfig.externals;
   const isProduction = argv.p || argv.mode === "production";
-
   const htmlPlugin = defaultConfig.plugins.find(
     plugin => plugin.constructor.name === "HtmlWebpackPlugin"
   );
 
   if (htmlPlugin) {
     htmlPlugin.options.title = 'Single-spa React 子应用';
-    htmlPlugin.options.favicon = path.resolve(
-      __dirname,
-      `${ROOT_CONFIG_URL}/favicon.ico`
-    );
   }
 
   return merge(defaultConfig, {
