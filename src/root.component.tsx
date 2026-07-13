@@ -2,10 +2,13 @@ import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import About from "./pages/About";
 import Home, {HomeProps} from "./pages/Home";
 
+const ROOT_CONFIG_URL = process.env.DEPLOY_BASE ?? "/micro-single-app-react";
+const isProduction = process.env.NODE_ENV === "production";
+
 export default function Root({name, basename = "/react"}: RootProps) {
   return (
     <BrowserRouter
-      basename={basename}
+      basename={isProduction ? `${ROOT_CONFIG_URL}${basename}` : basename}
       future={{
         v7_startTransition: true,
         v7_relativeSplatPath: true,

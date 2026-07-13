@@ -1,6 +1,7 @@
 {
   "extends": "ts-config-single-spa",
   "compilerOptions": {
+    "types": ["node"],
     "ignoreDeprecations": "6.0",
     "moduleResolution": "node",
     "jsx": "react-jsx",

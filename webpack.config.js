@@ -1,7 +1,8 @@
-const { HtmlWebpackPlugin, CustomStandaloneDisabledPlugin, GenerateImportMapPlugin } = require("@event-chat/micro-dev-config/plugins")
+const { CustomStandaloneDisabledPlugin, GenerateImportMapPlugin, HtmlWebpackPlugin, defineEnvPlugin } = require("@event-chat/micro-dev-config/plugins")
 const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
 const { merge } = require("webpack-merge");
 
+const ROOT_CONFIG_URL = process.env.DEPLOY_BASE ?? "/micro-single-app-react";
 const displayStandalonePage = (prod) => `<main>
   <h1>Single-spa: React 子应用</h1>
   <p>当前微前端以"集成模式"运行，不独立提供页面。</p>
@@ -35,6 +36,10 @@ module.exports = (webpackConfigEnv, argv) => {
     },
     plugins: [
       isProduction && new HtmlWebpackPlugin(),
+      defineEnvPlugin({ production: isProduction }, {
+        APP_NAME: '@levi/react',
+        BASE_URL: isProduction ? `${ROOT_CONFIG_URL}/` : "/"
+      }),
       new CustomStandaloneDisabledPlugin({
         handle: (html) => {
           if (html.includes("Your Microfrontend is not here")) {
