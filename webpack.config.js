@@ -27,6 +27,7 @@ module.exports = (webpackConfigEnv, argv) => {
 
   delete defaultConfig.externals;
   const isProduction = argv.p || argv.mode === "production";
+  const isStandalone = webpackConfigEnv.standalone;
   const htmlPlugin = defaultConfig.plugins.find(
     plugin => plugin.constructor.name === "HtmlWebpackPlugin"
   );
@@ -43,11 +44,12 @@ module.exports = (webpackConfigEnv, argv) => {
       port: 3000,
     },
     plugins: [
-      !htmlPlugin && new HtmlWebpackPlugin({ title: 'Single-spa React 子应用' }),
+      !htmlPlugin && new HtmlWebpackPlugin({ inject: !isProduction, title: 'Single-spa React 子应用' }),
       defineEnvPlugin({ production: isProduction }, {
         APP_NAME: '@levi/react',
         BASE_URL: isProduction ? `${ROOT_CONFIG_URL}/` : "/",
-        DEPLOY_BASE: ROOT_CONFIG_URL
+        DEPLOY_BASE: ROOT_CONFIG_URL,
+        STANDALONE: isStandalone
       }),
       copyPlugin([
         {
@@ -63,15 +65,16 @@ module.exports = (webpackConfigEnv, argv) => {
           if (html.includes("Your Microfrontend is not here")) {
             // dev mode: StandaloneSingleSpaPlugin 生成了默认提示，替换 <main> 内容
             return html.replace(/<main>[\s\S]*<\/main>/, displayStandalonePage(isProduction));
-          } else if (!htmlPlugin) {
+          } else if (isProduction) {
             // production mode: 无 StandaloneSingleSpaPlugin，注入完整提示页面
-            return html.replace('</head>', `<link rel="alternate icon" href="${ROOT_CONFIG_URL}/favicon.svg"></head>`).replace(
+            return html.replace('</head>', `<link rel="alternate icon" href="${ROOT_CONFIG_URL}/favicon.ico"></head>`).replace(
               /<body>[\s\S]*<\/body>/,
               `<body>
                 ${displayStandalonePage(isProduction)}
               </body>`
             );
           }
+          return html
         }
       }),
       new GenerateImportMapPlugin({

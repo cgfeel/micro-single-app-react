@@ -4,8 +4,9 @@ import Home, {HomeProps} from "./pages/Home";
 
 const ROOT_CONFIG_URL = process.env.DEPLOY_BASE ?? "/micro-single-app-react";
 const isProduction = process.env.NODE_ENV === "production";
+const namePath = process.env.STANDALONE ? "/" : "/react";
 
-export default function Root({name, basename = "/react"}: RootProps) {
+export default function Root({name, basename = namePath}: RootProps) {
   return (
     <BrowserRouter
       basename={isProduction ? `${ROOT_CONFIG_URL}${basename}` : basename}
