@@ -1,5 +1,4 @@
-const { HtmlWebpackPlugin } = require("@event-chat/micro-dev-config/helpers");
-const { CustomStandaloneDisabledPlugin, GenerateImportMapPlugin } = require("@event-chat/micro-dev-config/plugins")
+const { HtmlWebpackPlugin, CustomStandaloneDisabledPlugin, GenerateImportMapPlugin } = require("@event-chat/micro-dev-config/plugins")
 const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
 const { merge } = require("webpack-merge");
 

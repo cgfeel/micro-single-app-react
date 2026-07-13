@@ -23,7 +23,7 @@
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@babel/runtime": "^7.23.3",
-    "@event-chat/micro-dev-config": "^0.0.20",
+    "@event-chat/micro-dev-config": "^0.0.21",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^27.0.1",
