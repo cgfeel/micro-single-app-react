@@ -36,7 +36,10 @@ module.exports = (webpackConfigEnv, argv) => {
       port: 3000,
     },
     plugins: [
-      isProduction && new HtmlWebpackPlugin(),
+      isProduction && new HtmlWebpackPlugin({
+        title: 'Single-spa React 应用',
+        template: "./public/index.html"
+      }),
       defineEnvPlugin({ production: isProduction }, {
         APP_NAME: '@levi/react',
         BASE_URL: isProduction ? `${ROOT_CONFIG_URL}/` : "/",
