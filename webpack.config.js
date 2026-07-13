@@ -38,7 +38,8 @@ module.exports = (webpackConfigEnv, argv) => {
       isProduction && new HtmlWebpackPlugin(),
       defineEnvPlugin({ production: isProduction }, {
         APP_NAME: '@levi/react',
-        BASE_URL: isProduction ? `${ROOT_CONFIG_URL}/` : "/"
+        BASE_URL: isProduction ? `${ROOT_CONFIG_URL}/` : "/",
+        DEPLOY_BASE: ROOT_CONFIG_URL
       }),
       new CustomStandaloneDisabledPlugin({
         handle: (html) => {
