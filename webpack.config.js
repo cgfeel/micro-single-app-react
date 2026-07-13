@@ -1,6 +1,7 @@
-const { CustomStandaloneDisabledPlugin, GenerateImportMapPlugin, HtmlWebpackPlugin, defineEnvPlugin } = require("@event-chat/micro-dev-config/plugins")
+const { CustomStandaloneDisabledPlugin, GenerateImportMapPlugin, HtmlWebpackPlugin, copyPlugin, defineEnvPlugin } = require("@event-chat/micro-dev-config/plugins")
 const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
 const { merge } = require("webpack-merge");
+const path = require('path');
 
 const ROOT_CONFIG_URL = process.env.DEPLOY_BASE ?? "/micro-single-app-react";
 const displayStandalonePage = (prod) => `<main>
@@ -41,6 +42,15 @@ module.exports = (webpackConfigEnv, argv) => {
         BASE_URL: isProduction ? `${ROOT_CONFIG_URL}/` : "/",
         DEPLOY_BASE: ROOT_CONFIG_URL
       }),
+      copyPlugin([
+        {
+          from: path.resolve(__dirname, 'public'),
+          noErrorOnMissing: true,
+          globOptions: {
+            ignore: ['**/index.html']
+          },
+        }
+      ]),
       new CustomStandaloneDisabledPlugin({
         handle: (html) => {
           if (html.includes("Your Microfrontend is not here")) {
