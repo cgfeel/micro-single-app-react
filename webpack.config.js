@@ -26,6 +26,7 @@ module.exports = (webpackConfigEnv, argv) => {
   });
 
   delete defaultConfig.externals;
+  
   const isProduction = argv.p || argv.mode === "production";
   const isStandalone = webpackConfigEnv.standalone;
   const htmlPlugin = defaultConfig.plugins.find(
