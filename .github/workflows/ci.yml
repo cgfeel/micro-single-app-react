@@ -64,6 +64,18 @@ jobs:
         with:
           path: zf-micro-app/apps/single-spa/react-project/dist
 
+      - name: Trigger substrate build
+        if: github.event_name == 'push'
+        run: |
+          curl \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GH_PACKAGES_TOKEN }}" \
+            https://api.github.com/repos/cgfeel/micro-single-app-substrate/dispatches \
+            -d '{
+              "event_type":"micro-update"
+            }'
+
   deploy:
     if: github.event_name == 'push'
     needs: validate-and-build
